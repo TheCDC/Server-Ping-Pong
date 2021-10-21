@@ -27,7 +27,10 @@ def build_apps(n, chance=0.01):
                     depth = 0
 
                 if random.random() <= chance:
-                    return """Request fulfilled by {}""".format(app.config['APP_ID'])
+
+                    return """Request fulfilled by {}. There was a {} chance of exactly this many requests being made.""".format(
+                        app.config['APP_ID'],
+                        1 - (1 - chance)**(depth))
                 else:
                     next_server = random.randint(0, n - 1)
                     next_port = 5000 + next_server
